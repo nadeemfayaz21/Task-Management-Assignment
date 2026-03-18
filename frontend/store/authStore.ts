@@ -49,13 +49,10 @@ export const useAuthStore = create<AuthStore>()(
         set({ isLoading: true, error: null });
         try {
           const response = await api.register(email, password, name);
+          // Don't set user after registration - user must login separately
           set({
-            user: response.user,
-            accessToken: response.accessToken,
-            refreshToken: response.refreshToken,
             isLoading: false,
           });
-          api.setAccessToken(response.accessToken);
         } catch (error: any) {
           const errorMsg = error.response?.data?.error || 'Registration failed';
           const message = errorMsg.includes('already registered') 

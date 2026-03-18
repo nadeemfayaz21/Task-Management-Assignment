@@ -49,11 +49,8 @@ export default function RegisterPage() {
 
     try {
       await register(formData.email, formData.password, formData.name);
-      setToast({ message: 'Account created successfully! Redirecting to login...', type: 'success' });
-      // Clear the user to force logout and allow login
-      setTimeout(() => {
-        router.push('/login');
-      }, 2000);
+      // Immediately redirect to sign in page
+      router.push('/login');
     } catch (err: any) {
       setLocalError(error || 'Failed to register');
     }
@@ -115,7 +112,7 @@ export default function RegisterPage() {
             </div>
 
             <Button type="submit" fullWidth disabled={isLoading} variant="primary">
-              {isLoading ? 'Creating Account...' : 'Create Account'}
+              {isLoading ? 'Signing up...' : 'Sign Up'}
             </Button>
           </form>
 
@@ -123,7 +120,7 @@ export default function RegisterPage() {
             <p className="text-center text-gray-600 text-sm">
               Already have an account?{' '}
               <Link href="/login" className="text-blue-600 font-semibold hover:text-blue-700 transition">
-                Sign in instead
+                Sign In here
               </Link>
             </p>
           </div>
@@ -131,7 +128,7 @@ export default function RegisterPage() {
 
         {/* Footer Info */}
         <div className="mt-8 text-center text-pink-100 text-sm">
-          <p>Quick, easy, and secure registration</p>
+          <p>Quick, easy, and secure sign up</p>
         </div>
       </div>
 
